@@ -30,22 +30,24 @@ public class Server {
 		Scanner ssc = new Scanner(System.in);
 		boolean check = true;
 		try {
-			ss = new ServerSocket(8282);
-			System.out.println("클라이언트 접속받을 준비중");
-			sc = ss.accept();
-			is = sc.getInputStream(); //byte
-			ir = new InputStreamReader(is);//char
-			br = new BufferedReader(ir);//String
-
-			os = sc.getOutputStream(); //byte
-			ow = new OutputStreamWriter(os);
-			bw = new BufferedWriter(ow);
+			
+			
 			while(check) {
-				
+				ss = new ServerSocket(8282);
+				System.out.println("클라이언트 접속받을 준비중");
+				sc = ss.accept();
+				is = sc.getInputStream(); //byte
+				ir = new InputStreamReader(is);//char
+				br = new BufferedReader(ir);//String
+
+				os = sc.getOutputStream(); //byte
+				ow = new OutputStreamWriter(os);
+				bw = new BufferedWriter(ow);
 				str = br.readLine();
 				if (str.toLowerCase().equals("q")) {
 					break;
 				}//if
+				
 				System.out.println(str);
 				System.out.println("클라이언트로부터 메시지 받기 완료");
 				System.out.println("----------------------------");
@@ -54,7 +56,9 @@ public class Server {
 				str = ssc.next();
 				bw.write(str+"\r\n");
 				bw.flush();
-
+				if (str.toLowerCase().equals("q")) {
+					break;
+				}//if
 				System.out.println("클라이언트로 전송 완료");
 			}//while
 

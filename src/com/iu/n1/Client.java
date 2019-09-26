@@ -30,27 +30,28 @@ public class Client {
 		Scanner ssc = new Scanner(System.in);
 		boolean check = true;
 		try {
-			sc = new Socket("211.238.142.39", 8282);
-			os = sc.getOutputStream(); //byte
-			ow = new OutputStreamWriter(os);
-			bw = new BufferedWriter(ow);
-			is = sc.getInputStream(); //byte
-			ir = new InputStreamReader(is);//char
-			br = new BufferedReader(ir);//String
+			
+			
 			while(check) {
-
+				sc = new Socket("211.238.142.39", 8282);
+				os = sc.getOutputStream(); //byte
+				ow = new OutputStreamWriter(os);
+				bw = new BufferedWriter(ow);
+				is = sc.getInputStream(); //byte
+				ir = new InputStreamReader(is);//char
+				br = new BufferedReader(ir);//String
 				System.out.println("서버로 전송할 메시지를 입력하세요.");
 				str = ssc.next();
-				
-				bw.write(str+"\r\n");
-				bw.flush();
-				System.out.println("서버로 전송 완료");
-
 				if (str.toLowerCase().equals("q")) {
 					break;
 				}//if
+				bw.write(str+"\r\n");
+				bw.flush();
+				System.out.println("서버로 전송 완료");
 				str = br.readLine();
-
+				if (str.toLowerCase().equals("q")) {
+					break;
+				}//if
 				System.out.println(str);
 				System.out.println("서버로부터 메시지 받기 완료");
 				System.out.println("----------------------------");
